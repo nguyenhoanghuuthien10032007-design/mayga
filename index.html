@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tottenham Fanpage — Rực Rỡ</title>
+  <meta name="description" content="Fanpage mockup Tottenham — vibrant theme, team, shop, formations" />
+  <style>
+    :root{
+      --bg:#08142b; /* deep navy */
+      --accent1:#0ea5a0; /* teal */
+      --accent2:#ffdd57; /* gold */
+      --card:#ffffff;
+      --muted:#cbd5e1;
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.08);
+      --pitch: linear-gradient(180deg,#0b7a44 0%, #0a6a3a 100%);
+      font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 400px at 10% 10%, rgba(14,165,160,0.12), transparent),
+                  radial-gradient(900px 300px at 90% 90%, rgba(255,221,87,0.08), transparent),
+                  var(--bg);
+      color:var(--card);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.35;
+    }
+
+    /* Container */
+    .wrap{max-width:1200px;margin:24px auto;padding:20px;gap:20px;display:grid;grid-template-columns: 1fr 360px;}
+
+    /* Header */
+    header{grid-column:1/-1;display:flex;align-items:center;gap:18px;padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.04)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:64px;height:64px;object-fit:contain;border-radius:8px;background:var(--glass)}
+    .brand h1{font-size:20px;margin:0;color:var(--accent2); letter-spacing:0.6px}
+    nav{margin-left:auto;display:flex;gap:8px}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
+    nav a:hover{background:rgba(255,255,255,0.03);color:var(--card)}
+
+    /* Main left column */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    h2,h3{margin:0 0 8px 0}
+    p{margin:0 0 10px 0;color:#e6eef6}
+
+    /* Info grid */
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    /* Player gallery */
+    .players{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    .player{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      transition:transform .18s ease, box-shadow .18s;
+    }
+    .player:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    .player .photo{width:100px;height:100px;border-radius:999px;overflow:hidden;border:3px solid rgba(255,255,255,0.06)}
+    .player img{width:100%;height:100%;object-fit:cover;display:block}
+    .player .meta{font-weight:700;color:var(--accent1)}
+    .player small{display:block;color:var(--muted);margin-top:4px;font-weight:600}
+
+    /* Pitch area with two formations */
+    .pitch-wrap{margin-top:14px}
+    .pitch{
+      position:relative;
+      height:420px;
+      border-radius:12px;
+      background-image:linear-gradient(180deg,#094f2e,#0b6b3a 60%);
+      overflow:hidden;
+      display:block;
+      border:4px solid rgba(255,255,255,0.035);
+      box-shadow: inset 0 80px 120px rgba(0,0,0,0.25), 0 12px 30px rgba(2,6,23,0.6);
+    }
+    .pitch .midline{position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.06)}
+    .formation-side{position:absolute;top:10px;bottom:10px;width:46%;display:flex;flex-direction:column;justify-content:center;gap:12px}
+    .formation-left{left:2%}
+    .formation-right{right:2%}
+    .player-card{
+      width:220px; /* fixed width -> alignment stable */
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+      color:#071228;border-radius:10px;padding:8px;display:flex;gap:10px;align-items:center;
+      box-shadow:0 6px 20px rgba(2,6,23,0.35);
+    }
+    .player-card .thumb{width:48px;height:48px;border-radius:999px;overflow:hidden;border:2px solid rgba(2,6,23,0.06)}
+    .player-card img{width:100%;height:100%;object-fit:cover}
+    .player-card .info{font-size:12px}
+    .player-card .info strong{display:block}
+    /* Align player-cards vertically in columns */
+    .col{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+
+    /* Right column (sidebar) */
+    aside{display:flex;flex-direction:column;gap:14px}
+    .shop-item{display:flex;gap:10px;align-items:center;border-radius:10px;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .shop-item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none;color:#061125;background:var(--accent2);box-shadow:0 8px 18px rgba(255,221,87,0.12)}
+    .stat{display:flex;flex-direction:column;gap:6px}
+    .stat .num{font-weight:900;color:var(--accent1);font-size:20px}
+    .coach{display:flex;gap:12px;align-items:center}
+
+    footer{grid-column:1/-1;margin-top:20px;padding:10px;border-radius:10px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media(max-width:1000px){
+      .wrap{grid-template-columns:1fr}
+      .players{grid-template-columns:repeat(2,1fr)}
+      .player-card{width:100%}
+      .formation-side{width:46%}
+      .pitch{height:520px}
+    }
+    @media(max-width:560px){
+      .players{grid-template-columns:1fr}
+      .player .photo{width:84px;height:84px}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Tottenham_Hotspur.svg/1200px-Tottenham_Hotspur.svg.png" alt="Tottenham logo">
+        <div>
+          <h1>Tottenham Fanpage</h1>
+          <div style="font-size:12px;color:var(--muted)">Rực rỡ • Đẹp như fanpages chính thức</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">Giới thiệu</a>
+        <a href="#team">Đội</a>
+        <a href="#formation">Sơ đồ</a>
+        <a href="#shop">Shop</a>
+      </nav>
+    </header>
+
+    <!-- LEFT: main content -->
+    <main class="card" style="overflow:hidden">
+      <!-- About -->
+      <section id="about" class="card" style="margin-bottom:12px">
+        <h2>Về CLB — Lịch sử & Danh hiệu</h2>
+        <div class="info-grid" style="margin-top:10px">
+          <div>
+            <p><strong>Thành lập:</strong> 1882</p>
+            <p><strong>Địa điểm:</strong> North London</p>
+            <p><strong>Tông màu:</strong> Navy • Trắng • Vàng accent</p>
+          </div>
+          <div>
+            <p><strong>Danh hiệu chính:</strong></p>
+            <ul style="color:var(--muted);margin:6px 0 0 18px">
+              <li>FA Cup: 8 lần</li>
+              <li>League Cup: 4 lần</li>
+              <li>UEFA/Europa: 2 lần</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top:14px">Ngôi đền huyền thoại</h3>
+        <p style="color:var(--muted)">Những huyền thoại góp phần tạo nên di sản Spurs:</p>
+        <ul style="color:var(--muted);margin-left:18px">
+          <li>Jimmy Greaves</li>
+          <li>Glenn Hoddle</li>
+          <li>Ledley King</li>
+          <li>Danny Blanchflower</li>
+        </ul>
+      </section>
+
+      <!-- Players -->
+      <section id="team" class="card" style="margin-top:12px">
+        <h2>Đội hình & Cầu thủ nổi bật</h2>
+        <div class="players" aria-live="polite">
+          <!-- Son Heung-min -->
+          <article class="player">
+            <div class="photo"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Son_Heung-min_2023.jpg" alt="Son Heung-min"></div>
+            <div class="meta">Son Heung-min</div>
+            <small>#7 · LW · KOR · 08/07/1992</small>
+          </article>
+
+          <!-- Harry Kane -->
+          <article class="player">
+            <div class="photo"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Harry_Kane_2019.jpg" alt="Harry Kane"></div>
+            <div class="meta">Harry Kane</div>
+            <small>#10 · ST · ENG · 28/07/1993</small>
+          </article>
+
+          <!-- Cristian Romero -->
+          <article class="player">
+            <div class="photo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Cristian_Romero_2022.jpg" alt="Cristian Romero"></div>
+            <div class="meta">Cristian Romero</div>
+            <small>#4 · CB · ARG · 27/04/1998</small>
+          </article>
+
+          <!-- G. Vicario -->
+          <article class="player">
+            <div class="photo"><img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Vicario_2023.jpg" alt="Guglielmo Vicario"></div>
+            <div class="meta">Guglielmo Vicario</div>
+            <small>#1 · GK · ITA · 07/12/1996</small>
+          </article>
+        </div>
+      </section>
+
+      <!-- Pitch & formations -->
+      <section id="formation" class="card pitch-wrap">
+        <h2>Sơ đồ: Golden Era vs Hiện tại</h2>
+        <p style="color:var(--muted);margin-top:6px">Hai đội hình được đặt trên cùng một sân cỏ để nhìn như đang đối đầu — mỗi thẻ cầu thủ bằng nhau để không bị lệch.</p>
+
+        <div class="pitch" role="img" aria-label="pitch with two formations" style="margin-top:10px">
+          <div class="midline"></div>
+
+          <!-- LEFT: Golden Era (ví dụ) -->
+          <div class="formation-side formation-left">
+            <div class="col" style="align-items:flex-start;">
+              <div class="player-card">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Jimmy_Greaves_1970.jpg" alt="Jimmy Greaves"></div>
+                <div class="info"><strong>Jimmy Greaves</strong><span style="font-size:11px;color:#42566a">ST • #9 • ENG</span></div>
+              </div>
+
+              <div class="player-card">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Glenn_Hoddle_1982.jpg" alt="Glenn Hoddle"></div>
+                <div class="info"><strong>Glenn Hoddle</strong><span style="font-size:11px;color:#42566a">AM • #10 • ENG</span></div>
+              </div>
+
+              <div class="player-card">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Ledley_King_2008.jpg" alt="Ledley King"></div>
+                <div class="info"><strong>Ledley King</strong><span style="font-size:11px;color:#42566a">CB • #6 • ENG</span></div>
+              </div>
+
+              <div class="player-card">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Danny_Blanchflower_1961.jpg" alt="Danny Blanchflower"></div>
+                <div class="info"><strong>Danny Blanchflower</strong><span style="font-size:11px;color:#42566a">CM • #4 • NIR</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Current lineup -->
+          <div class="formation-side formation-right">
+            <div class="col" style="align-items:flex-end;">
+              <div class="player-card" style="flex-direction:row-reverse">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Vicario_2023.jpg" alt="Vicario"></div>
+                <div class="info" style="text-align:right"><strong>G. Vicario</strong><span style="font-size:11px;color:#42566a">GK • #1 • ITA</span></div>
+              </div>
+
+              <div class="player-card" style="flex-direction:row-reverse">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Pedro_Porro_2022.jpg" alt="Pedro Porro"></div>
+                <div class="info" style="text-align:right"><strong>Pedro Porro</strong><span style="font-size:11px;color:#42566a">RB • #2 • ESP</span></div>
+              </div>
+
+              <div class="player-card" style="flex-direction:row-reverse">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Cristian_Romero_2022.jpg" alt="Romero"></div>
+                <div class="info" style="text-align:right"><strong>C. Romero</strong><span style="font-size:11px;color:#42566a">CB • #4 • ARG</span></div>
+              </div>
+
+              <div class="player-card" style="flex-direction:row-reverse">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Son_Heung-min_2023.jpg" alt="Son"></div>
+                <div class="info" style="text-align:right"><strong>Son Heung-min</strong><span style="font-size:11px;color:#42566a">LW • #7 • KOR</span></div>
+              </div>
+
+              <div class="player-card" style="flex-direction:row-reverse">
+                <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Harry_Kane_2019.jpg" alt="Kane"></div>
+                <div class="info" style="text-align:right"><strong>Harry Kane</strong><span style="font-size:11px;color:#42566a">ST • #10 • ENG</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Extra notes or CTA -->
+      <section class="card" style="margin-top:12px;display:flex;gap:12px;align-items:center;justify-content:space-between">
+        <div>
+          <h3 style="margin-bottom:6px">Huấn luyện viên xuất sắc</h3>
+          <p style="color:var(--muted);margin:0">Một HLV tài ba với phong cách tấn công, nổi bật ở chiến thuật pressing và khai thác tốc độ 2 bên cánh.</p>
+        </div>
+        <a class="btn" href="#shop">Mua áo ngay</a>
+      </section>
+    </main>
+
+    <!-- RIGHT: sidebar -->
+    <aside>
+      <div class="card">
+        <h3>Shop chính</h3>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <div class="shop-item">
+            <img src="https://via.placeholder.com/300x300?text=Home+Shirt" alt="Home shirt">
+            <div>
+              <div style="font-weight:900;color:var(--accent1)">Home Shirt 25/26</div>
+              <div style="font-size:13px;color:var(--muted)">£69.99</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:6px">Fans: <strong style="color:var(--accent2)">12,345</strong></div>
+            </div>
+          </div>
+
+          <div class="shop-item">
+            <img src="https://via.placeholder.com/300x300?text=Away+Shirt" alt="Away shirt">
+            <div>
+              <div style="font-weight:900;color:var(--accent1)">Away Shirt 25/26</div>
+              <div style="font-size:13px;color:var(--muted)">£69.99</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:6px">Fans: <strong style="color:var(--accent2)">9,421</strong></div>
+            </div>
+          </div>
+
+          <div style="margin-top:8px">
+            <a class="btn" href="#shop" style="width:100%;display:inline-block;text-align:center">Ghé Shop</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Thống kê Fan</h3>
+        <div class="stat" style="margin-top:10px">
+          <div>Page Followers <span class="num">1,234,567</span></div>
+          <div>Matchday Subscribers <span class="num">342,001</span></div>
+          <div>Shop Followers <span class="num">98,345</span></div>
+          <div>Newsletter <span class="num">56,789</span></div>
+        </div>
+      </div>
+
+      <div class="card coach">
+        <div style="width:68px;height:68px;border-radius:999px;background:var(--glass);overflow:hidden">
+          <img src="https://via.placeholder.com/150" alt="Coach" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div>
+          <div style="font-weight:900">Top Manager</div>
+          <div style="color:var(--muted);font-size:13px">Tactical mastermind — attacking, pressing, motivating.</div>
+        </div>
+      </div>
+    </aside>
+
+    <footer>
+      <div>Fanpage mockup — Lưu ý: thay ảnh bằng tài nguyên có bản quyền để chính thức hóa trang.</div>
+    </footer>
+  </div>
+
+  <!-- Minimal JS: smooth scroll + optional interactions -->
+  <script>
+    // Smooth scroll for anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href)?.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Example: click player-card to show quick alert (you can replace with modal)
+    document.querySelectorAll('.player-card').forEach(pc=>{
+      pc.addEventListener('click', ()=> {
+        const name = pc.querySelector('.info strong')?.innerText || 'Player';
+        alert(name + ' — Xem thông tin chi tiết (mock).');
+      });
+    });
+  </script>
+</body>
+</html>
